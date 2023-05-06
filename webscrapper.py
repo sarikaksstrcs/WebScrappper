@@ -26,6 +26,8 @@ for i in range(0,len(poem_details),2):
 
 print(poem_details_dict)
 
+poet = poem_details_dict['Lyrics']
+print("poet",poet)
 
 
 
