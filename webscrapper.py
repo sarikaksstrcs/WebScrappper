@@ -1,6 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 
+
+
 # URL of the webpage containing the poem lines
 url = 'https://www.malayalachalachithram.com/song.php?i=13178'
 
@@ -14,11 +16,24 @@ soup = BeautifulSoup(html_content, 'html.parser')
 #print(soup)
 #print(soup.prettify())
 
+section = soup.find_all('table', class_ = 'mdetails')
+poem_details = [detail.get_text() for detail in section[0].find_all('td')]
+
+poem_details_dict = {}
+
+for i in range(0,len(poem_details),2):
+    poem_details_dict[poem_details[i]] = poem_details[i+1]
+
+print(poem_details_dict)
+
+
+
+
 full_lyrics = soup.find_all('table',id = "tbllyrics")
 #print(full_lyrics)
 for lyrics in full_lyrics:
     l = lyrics.find_all('td')
-    print(l[1].text)
+    #print(l[1].text)
 #print(soup.get_text())
 
 poem_lines = [line.text.strip() for line in soup.find_all('table',id = "tbllyrics")]
